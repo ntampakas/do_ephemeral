@@ -1,5 +1,7 @@
 name: launch_ephemeral_runner
 on:
+  schedule:
+    - cron: '*/5 * * * *'
   push:
     branches:
       - master
@@ -28,4 +30,4 @@ jobs:
           persist-credentials: false
 
       - name: Create droplet
-        run: ./run.sh
+        run: ./run.sh "${{ github.event_name }}"

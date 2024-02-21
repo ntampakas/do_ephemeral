@@ -4,6 +4,11 @@ set -eux
 
 EXIT_CODE=0
 
+if [ "$1" == "schedule" ]; then
+  echo "Triggered on schedule"
+  exit 0
+fi
+
 doctl compute droplet create ntampakas-8 \
   --region "${REGION}" \
   --image "${IMAGE_NAME}" \
