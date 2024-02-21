@@ -1,0 +1,31 @@
+name: launch_runner
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    timeout-minutes: 5
+    env:
+      IMAGE_NAME: ubuntu-23-10-x64
+      REGION: fra1
+      KEY_NAME: e6:5f:fd:33:82:91:82:9c:35:be:8b:0a:50:74:c5:cf
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_ACCESS_TOKEN }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Create droplet
+        run: ./run.sh
