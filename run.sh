@@ -5,7 +5,7 @@ set -eux
 EXIT_CODE=0
 
 if [ "$1" = "schedule" ]; then
-  echo "Triggered on schedule"
+  doctl compute droplet list --format "Name,ID,Status" | grep off | awk '$1 ~ /^ntampakas-/ {print $2}' | xargs  doctl compute droplet delete -f
   exit 0
 fi
 
