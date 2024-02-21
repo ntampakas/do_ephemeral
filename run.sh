@@ -4,7 +4,7 @@ set -eux
 
 EXIT_CODE=0
 
-if [ "$1" == "schedule" ]; then
+if [ "$1" = "schedule" ]; then
   echo "Triggered on schedule"
   exit 0
 fi
