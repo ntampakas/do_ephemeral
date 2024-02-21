@@ -1,8 +1,8 @@
-name: launch_runner
+name: launch_ephemeral_runner
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   main:
